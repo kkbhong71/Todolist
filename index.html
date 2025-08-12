@@ -6,10 +6,10 @@
     <meta name="theme-color" content="#667eea">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23667eea'/%3E%3Cpath d='M8 12h16v2H8zm0 4h12v2H8zm0 4h14v2H8z' fill='%23fff'/%3E%3Ccircle cx='24' cy='24' r='4' fill='%23FFB6C1'/%3E%3Cpath d='M22 24h4m-2-2v4' stroke='%23fff' stroke-width='1' stroke-linecap='round'/%3E%3C/svg%3E">
     <meta name="description" content="고급 기능을 포함한 직관적인 할 일 관리 앱">
-    <title>✨ 할 일 관리 Pro ✨</title>
+    <title data-i18n="app.title">✨ 할 일 관리 Pro ✨</title>
     
-    <!-- 수정된 간소화된 CSP 설정 -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:;">
+    <!-- PWA 및 보안 설정 -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https:;">
     
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
@@ -19,11 +19,31 @@
     <meta name="apple-mobile-web-app-title" content="할 일 관리">
 </head>
 <body>
+    <!-- 알림 허용 요청 모달 -->
+    <div id="notificationModal" class="notification-modal hidden">
+        <div class="notification-modal-content">
+            <h3 data-i18n="notifications.permission_title">📢 알림 권한</h3>
+            <p data-i18n="notifications.permission_message">마감일과 중요한 할 일 알림을 받으시겠습니까?</p>
+            <div class="notification-modal-actions">
+                <button id="allowNotifications" class="btn-primary" data-i18n="notifications.allow">허용</button>
+                <button id="denyNotifications" class="btn-secondary" data-i18n="notifications.deny">나중에</button>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <header class="header">
             <div class="header-top">
-                <h1 class="title">📋 할 일 관리 Pro</h1>
+                <h1 class="title" data-i18n="app.title">📋 할 일 관리 Pro</h1>
                 <div class="header-controls">
+                    <!-- 언어 선택 버튼 -->
+                    <button id="languageToggle" class="language-toggle" aria-label="언어 전환" title="언어 전환">
+                        🌐
+                    </button>
+                    <!-- 알림 설정 버튼 -->
+                    <button id="notificationToggle" class="notification-toggle" aria-label="알림 설정" title="알림 설정">
+                        🔔
+                    </button>
                     <button id="darkModeToggle" class="dark-mode-toggle" aria-label="다크모드 전환" title="다크모드 전환">
                         🌙
                     </button>
@@ -32,7 +52,7 @@
                     </button>
                 </div>
             </div>
-            <p class="subtitle">효율적인 일상 관리 💼</p>
+            <p class="subtitle" data-i18n="app.subtitle">효율적인 일상 관리 💼</p>
         </header>
 
         <!-- 검색 섹션 -->
@@ -41,6 +61,7 @@
                 <input 
                     type="text" 
                     id="searchInput" 
+                    data-i18n-placeholder="search.placeholder"
                     placeholder="할 일 검색... 🔍" 
                     aria-label="할 일 검색"
                     autocomplete="off"
@@ -49,6 +70,10 @@
                     ✕
                 </button>
             </div>
+            <!-- 음성 검색 버튼 -->
+            <button id="voiceSearchBtn" class="voice-search-btn" title="음성 검색" aria-label="음성 검색">
+                🎤
+            </button>
         </section>
 
         <section class="input-section" aria-label="새 할 일 추가">
@@ -56,6 +81,7 @@
                 <input 
                     type="text" 
                     id="todoInput" 
+                    data-i18n-placeholder="todo.input_placeholder"
                     placeholder="할 일을 입력하세요 📝" 
                     maxlength="100"
                     aria-label="할 일 입력"
@@ -69,29 +95,49 @@
             <!-- 할 일 추가 옵션 -->
             <div class="todo-options">
                 <div class="option-group">
-                    <label for="categorySelect" class="option-label">카테고리:</label>
+                    <label for="categorySelect" class="option-label" data-i18n="todo.category">카테고리:</label>
                     <select id="categorySelect" class="category-select">
-                        <option value="개인">🙋‍♂️ 개인</option>
-                        <option value="업무">💼 업무</option>
-                        <option value="취미">🎨 취미</option>
-                        <option value="건강">💪 건강</option>
-                        <option value="학습">📚 학습</option>
-                        <option value="쇼핑">🛒 쇼핑</option>
+                        <option value="개인" data-i18n="categories.personal">🙋‍♂️ 개인</option>
+                        <option value="업무" data-i18n="categories.work">💼 업무</option>
+                        <option value="취미" data-i18n="categories.hobby">🎨 취미</option>
+                        <option value="건강" data-i18n="categories.health">💪 건강</option>
+                        <option value="학습" data-i18n="categories.study">📚 학습</option>
+                        <option value="쇼핑" data-i18n="categories.shopping">🛒 쇼핑</option>
+                        <option value="여행" data-i18n="categories.travel">✈️ 여행</option>
+                        <option value="가족" data-i18n="categories.family">👨‍👩‍👧‍👦 가족</option>
+                        <option value="커스텀" data-i18n="categories.custom">⚙️ 커스텀</option>
                     </select>
+                    <!-- 커스텀 카테고리 입력 -->
+                    <input type="text" id="customCategoryInput" class="custom-category-input hidden" 
+                           data-i18n-placeholder="categories.custom_placeholder" placeholder="새 카테고리 입력">
                 </div>
                 
                 <div class="option-group">
-                    <label for="prioritySelect" class="option-label">우선순위:</label>
+                    <label for="prioritySelect" class="option-label" data-i18n="todo.priority">우선순위:</label>
                     <select id="prioritySelect" class="priority-select">
-                        <option value="3">🔴 높음</option>
-                        <option value="2" selected>🟡 보통</option>
-                        <option value="1">🟢 낮음</option>
+                        <option value="5" data-i18n="priority.urgent">🔥 긴급</option>
+                        <option value="4" data-i18n="priority.high">🔴 높음</option>
+                        <option value="3" data-i18n="priority.medium">🟡 보통</option>
+                        <option value="2" selected data-i18n="priority.normal">🟢 일반</option>
+                        <option value="1" data-i18n="priority.low">🔵 낮음</option>
                     </select>
                 </div>
                 
                 <div class="option-group">
-                    <label for="dueDateInput" class="option-label">마감일:</label>
+                    <label for="dueDateInput" class="option-label" data-i18n="todo.due_date">마감일:</label>
                     <input type="date" id="dueDateInput" class="due-date-input">
+                </div>
+
+                <!-- 알림 설정 -->
+                <div class="option-group">
+                    <label for="reminderSelect" class="option-label" data-i18n="todo.reminder">알림:</label>
+                    <select id="reminderSelect" class="reminder-select">
+                        <option value="" data-i18n="reminder.none">없음</option>
+                        <option value="10" data-i18n="reminder.10min">10분 전</option>
+                        <option value="30" data-i18n="reminder.30min">30분 전</option>
+                        <option value="60" data-i18n="reminder.1hour">1시간 전</option>
+                        <option value="1440" data-i18n="reminder.1day">1일 전</option>
+                    </select>
                 </div>
             </div>
         </section>
@@ -100,37 +146,49 @@
         <section class="filter-section" aria-label="할 일 필터">
             <div class="filter-container">
                 <div class="filter-group">
-                    <label class="filter-label">카테고리:</label>
+                    <label class="filter-label" data-i18n="filters.category">카테고리:</label>
                     <select id="categoryFilter" class="filter-select">
-                        <option value="">전체</option>
-                        <option value="개인">🙋‍♂️ 개인</option>
-                        <option value="업무">💼 업무</option>
-                        <option value="취미">🎨 취미</option>
-                        <option value="건강">💪 건강</option>
-                        <option value="학습">📚 학습</option>
-                        <option value="쇼핑">🛒 쇼핑</option>
+                        <option value="" data-i18n="filters.all">전체</option>
+                        <option value="개인" data-i18n="categories.personal">🙋‍♂️ 개인</option>
+                        <option value="업무" data-i18n="categories.work">💼 업무</option>
+                        <option value="취미" data-i18n="categories.hobby">🎨 취미</option>
+                        <option value="건강" data-i18n="categories.health">💪 건강</option>
+                        <option value="학습" data-i18n="categories.study">📚 학습</option>
+                        <option value="쇼핑" data-i18n="categories.shopping">🛒 쇼핑</option>
+                        <option value="여행" data-i18n="categories.travel">✈️ 여행</option>
+                        <option value="가족" data-i18n="categories.family">👨‍👩‍👧‍👦 가족</option>
                     </select>
                 </div>
                 
                 <div class="filter-group">
-                    <label class="filter-label">상태:</label>
+                    <label class="filter-label" data-i18n="filters.status">상태:</label>
                     <select id="statusFilter" class="filter-select">
-                        <option value="">전체</option>
-                        <option value="pending">진행중</option>
-                        <option value="completed">완료</option>
-                        <option value="overdue">지연</option>
+                        <option value="" data-i18n="filters.all">전체</option>
+                        <option value="pending" data-i18n="status.pending">진행중</option>
+                        <option value="completed" data-i18n="status.completed">완료</option>
+                        <option value="overdue" data-i18n="status.overdue">지연</option>
                     </select>
                 </div>
                 
                 <div class="filter-group">
-                    <label class="filter-label">정렬:</label>
+                    <label class="filter-label" data-i18n="filters.sort">정렬:</label>
                     <select id="sortSelect" class="filter-select">
-                        <option value="date">날짜순</option>
-                        <option value="priority">우선순위</option>
-                        <option value="category">카테고리</option>
-                        <option value="dueDate">마감일</option>
-                        <option value="manual">수동정렬</option>
+                        <option value="date" data-i18n="sort.date">날짜순</option>
+                        <option value="priority" data-i18n="sort.priority">우선순위</option>
+                        <option value="category" data-i18n="sort.category">카테고리</option>
+                        <option value="dueDate" data-i18n="sort.due_date">마감일</option>
+                        <option value="manual" data-i18n="sort.manual">수동정렬</option>
                     </select>
+                </div>
+
+                <!-- 빠른 필터 버튼들 -->
+                <div class="filter-group">
+                    <label class="filter-label" data-i18n="filters.quick">빠른 필터:</label>
+                    <div class="quick-filters">
+                        <button id="todayFilter" class="quick-filter-btn" data-i18n="filters.today">오늘</button>
+                        <button id="urgentFilter" class="quick-filter-btn" data-i18n="filters.urgent">긴급</button>
+                        <button id="overdueFilter" class="quick-filter-btn" data-i18n="filters.overdue">지연</button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -138,34 +196,117 @@
         <section class="stats" aria-label="할 일 통계">
             <div class="stat-item">
                 <span class="stat-number" id="totalTasks" aria-label="전체 할 일 개수">0</span>
-                <span class="stat-label">전체</span>
+                <span class="stat-label" data-i18n="stats.total">전체</span>
             </div>
             <div class="stat-item">
                 <span class="stat-number" id="completedTasks" aria-label="완료된 할 일 개수">0</span>
-                <span class="stat-label">완료</span>
+                <span class="stat-label" data-i18n="stats.completed">완료</span>
             </div>
             <div class="stat-item">
                 <span class="stat-number" id="pendingTasks" aria-label="남은 할 일 개수">0</span>
-                <span class="stat-label">진행중</span>
+                <span class="stat-label" data-i18n="stats.pending">진행중</span>
             </div>
             <div class="stat-item">
                 <span class="stat-number" id="overdueTasks" aria-label="지연된 할 일 개수">0</span>
-                <span class="stat-label">지연</span>
+                <span class="stat-label" data-i18n="stats.overdue">지연</span>
             </div>
         </section>
 
-        <!-- 통계 대시보드 (숨김 상태) -->
+        <!-- 확장된 통계 대시보드 -->
         <section class="dashboard hidden" id="dashboard" aria-label="상세 통계 대시보드">
             <div class="dashboard-content">
                 <div class="dashboard-header">
-                    <h3>📊 상세 통계</h3>
+                    <h3 data-i18n="dashboard.title">📊 상세 통계</h3>
                     <button id="closeDashboard" class="close-btn" aria-label="대시보드 닫기">✕</button>
                 </div>
-                <div style="text-align: center; color: #8B5A8C;">
-                    <p style="margin-bottom: 10px;">전체 할 일: <span id="dashTotalTasks">0</span>개</p>
-                    <p style="margin-bottom: 10px;">완료된 할 일: <span id="dashCompletedTasks">0</span>개</p>
-                    <p style="margin-bottom: 10px;">진행률: <span id="dashProgress">0</span>%</p>
-                    <p>오늘의 할 일: <span id="dashTodayTasks">0</span>개</p>
+                
+                <!-- 통계 탭 -->
+                <div class="dashboard-tabs">
+                    <button class="dashboard-tab active" data-tab="overview" data-i18n="dashboard.overview">개요</button>
+                    <button class="dashboard-tab" data-tab="charts" data-i18n="dashboard.charts">차트</button>
+                    <button class="dashboard-tab" data-tab="trends" data-i18n="dashboard.trends">트렌드</button>
+                    <button class="dashboard-tab" data-tab="productivity" data-i18n="dashboard.productivity">생산성</button>
+                </div>
+
+                <!-- 개요 탭 -->
+                <div class="dashboard-panel active" id="overview-panel">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">📋</div>
+                            <div class="stat-info">
+                                <div class="stat-value" id="dashTotalTasks">0</div>
+                                <div class="stat-title" data-i18n="stats.total">전체 할 일</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">✅</div>
+                            <div class="stat-info">
+                                <div class="stat-value" id="dashCompletedTasks">0</div>
+                                <div class="stat-title" data-i18n="stats.completed">완료됨</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">📈</div>
+                            <div class="stat-info">
+                                <div class="stat-value" id="dashProgress">0%</div>
+                                <div class="stat-title" data-i18n="dashboard.progress">진행률</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">🎯</div>
+                            <div class="stat-info">
+                                <div class="stat-value" id="dashTodayTasks">0</div>
+                                <div class="stat-title" data-i18n="dashboard.today">오늘 할 일</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 카테고리별 분포 -->
+                    <div class="category-distribution">
+                        <h4 data-i18n="dashboard.category_distribution">카테고리별 분포</h4>
+                        <div id="categoryChart" class="chart-container"></div>
+                    </div>
+                </div>
+
+                <!-- 차트 탭 -->
+                <div class="dashboard-panel" id="charts-panel">
+                    <div class="chart-controls">
+                        <select id="chartPeriod" class="chart-period-select">
+                            <option value="week" data-i18n="chart.week">이번 주</option>
+                            <option value="month" data-i18n="chart.month">이번 달</option>
+                            <option value="year" data-i18n="chart.year">올해</option>
+                        </select>
+                    </div>
+                    <div id="completionChart" class="chart-container"></div>
+                    <div id="priorityChart" class="chart-container"></div>
+                </div>
+
+                <!-- 트렌드 탭 -->
+                <div class="dashboard-panel" id="trends-panel">
+                    <div id="trendsChart" class="chart-container"></div>
+                    <div class="trends-summary">
+                        <h4 data-i18n="dashboard.trends_summary">트렌드 요약</h4>
+                        <div id="trendsSummaryContent"></div>
+                    </div>
+                </div>
+
+                <!-- 생산성 탭 -->
+                <div class="dashboard-panel" id="productivity-panel">
+                    <div class="productivity-metrics">
+                        <div class="metric-item">
+                            <span class="metric-label" data-i18n="productivity.avg_completion">평균 완료율:</span>
+                            <span class="metric-value" id="avgCompletion">0%</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label" data-i18n="productivity.best_day">최고 생산성 요일:</span>
+                            <span class="metric-value" id="bestDay">-</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label" data-i18n="productivity.streak">연속 달성일:</span>
+                            <span class="metric-value" id="currentStreak">0일</span>
+                        </div>
+                    </div>
+                    <div id="productivityChart" class="chart-container"></div>
                 </div>
             </div>
         </section>
@@ -174,9 +315,9 @@
         <section class="calendar-section" aria-label="달력">
             <div class="calendar-controls">
                 <div class="view-selector">
-                    <button id="weekView" class="view-btn active" aria-label="주간 뷰">주간</button>
-                    <button id="monthView" class="view-btn" aria-label="월간 뷰">월간</button>
-                    <button id="yearView" class="view-btn" aria-label="연간 뷰">연간</button>
+                    <button id="weekView" class="view-btn active" aria-label="주간 뷰" data-i18n="calendar.week">주간</button>
+                    <button id="monthView" class="view-btn" aria-label="월간 뷰" data-i18n="calendar.month">월간</button>
+                    <button id="yearView" class="view-btn" aria-label="연간 뷰" data-i18n="calendar.year">연간</button>
                 </div>
                 <div class="calendar-header">
                     <button id="prevPeriod" class="calendar-nav" aria-label="이전 기간">‹</button>
@@ -188,13 +329,13 @@
             <!-- 주간 뷰 컨테이너 -->
             <div id="weekViewContainer" class="calendar-container">
                 <div class="calendar-weekdays">
-                    <div class="weekday">일</div>
-                    <div class="weekday">월</div>
-                    <div class="weekday">화</div>
-                    <div class="weekday">수</div>
-                    <div class="weekday">목</div>
-                    <div class="weekday">금</div>
-                    <div class="weekday">토</div>
+                    <div class="weekday" data-i18n="weekdays.sun">일</div>
+                    <div class="weekday" data-i18n="weekdays.mon">월</div>
+                    <div class="weekday" data-i18n="weekdays.tue">화</div>
+                    <div class="weekday" data-i18n="weekdays.wed">수</div>
+                    <div class="weekday" data-i18n="weekdays.thu">목</div>
+                    <div class="weekday" data-i18n="weekdays.fri">금</div>
+                    <div class="weekday" data-i18n="weekdays.sat">토</div>
                 </div>
                 <div id="weekGrid" class="calendar-grid week-grid">
                     <!-- 주간 날짜들이 여기에 동적으로 생성됩니다 -->
@@ -204,13 +345,13 @@
             <!-- 월간 뷰 컨테이너 -->
             <div id="monthViewContainer" class="calendar-container hidden">
                 <div class="calendar-weekdays">
-                    <div class="weekday">일</div>
-                    <div class="weekday">월</div>
-                    <div class="weekday">화</div>
-                    <div class="weekday">수</div>
-                    <div class="weekday">목</div>
-                    <div class="weekday">금</div>
-                    <div class="weekday">토</div>
+                    <div class="weekday" data-i18n="weekdays.sun">일</div>
+                    <div class="weekday" data-i18n="weekdays.mon">월</div>
+                    <div class="weekday" data-i18n="weekdays.tue">화</div>
+                    <div class="weekday" data-i18n="weekdays.wed">수</div>
+                    <div class="weekday" data-i18n="weekdays.thu">목</div>
+                    <div class="weekday" data-i18n="weekdays.fri">금</div>
+                    <div class="weekday" data-i18n="weekdays.sat">토</div>
                 </div>
                 <div id="monthGrid" class="calendar-grid month-grid">
                     <!-- 월간 달력 날짜들이 여기에 동적으로 생성됩니다 -->
@@ -225,44 +366,78 @@
             </div>
 
             <div class="date-selector">
-                <button id="todayBtn" class="today-btn">오늘</button>
-                <span id="selectedDate" class="selected-date">전체 할 일</span>
+                <button id="todayBtn" class="today-btn" data-i18n="calendar.today">오늘</button>
+                <span id="selectedDate" class="selected-date" data-i18n="calendar.all_todos">전체 할 일</span>
             </div>
         </section>
 
         <main class="todo-section" aria-label="할 일 목록">
             <!-- 드래그 앤 드롭 가이드 -->
             <div id="dragGuide" class="drag-guide hidden">
-                <p>📋 드래그해서 순서를 변경하세요</p>
+                <p data-i18n="todo.drag_guide">📋 드래그해서 순서를 변경하세요</p>
             </div>
             
-            <ul id="todoList" class="todo-list" role="list">
-                <!-- 할 일 목록이 여기에 동적으로 추가됩니다 -->
-            </ul>
+            <!-- 가상화된 할 일 리스트 -->
+            <div id="todoListContainer" class="todo-list-container">
+                <ul id="todoList" class="todo-list" role="list">
+                    <!-- 할 일 목록이 여기에 동적으로 추가됩니다 -->
+                </ul>
+            </div>
             
             <div id="emptyState" class="empty-state" role="status" aria-live="polite">
                 <div class="empty-icon">📝</div>
-                <p>등록된 할 일이 없습니다!</p>
-                <p>위에서 새로운 할 일을 추가해보세요 ✨</p>
+                <p data-i18n="empty.no_todos">등록된 할 일이 없습니다!</p>
+                <p data-i18n="empty.add_todo">위에서 새로운 할 일을 추가해보세요 ✨</p>
+            </div>
+
+            <!-- 무한 스크롤 로딩 인디케이터 -->
+            <div id="loadingIndicator" class="loading-indicator hidden">
+                <div class="spinner"></div>
+                <p data-i18n="loading.more_todos">더 많은 할 일을 불러오는 중...</p>
             </div>
         </main>
 
         <footer class="footer">
-            <p>효율적인 하루 되세요! 💪</p>
+            <p data-i18n="footer.message">효율적인 하루 되세요! 💪</p>
             <div class="footer-actions">
-                <button id="exportData" class="footer-btn" title="데이터 내보내기">
+                <button id="exportData" class="footer-btn" title="데이터 내보내기" data-i18n="footer.export">
                     📤 내보내기
                 </button>
                 <input type="file" id="importData" accept=".json" style="display: none;">
-                <button id="importBtn" class="footer-btn" title="데이터 가져오기">
+                <button id="importBtn" class="footer-btn" title="데이터 가져오기" data-i18n="footer.import">
                     📥 가져오기
+                </button>
+                <button id="clearAllData" class="footer-btn footer-btn-danger" title="모든 데이터 삭제" data-i18n="footer.clear_all">
+                    🗑️ 전체 삭제
                 </button>
             </div>
         </footer>
     </div>
 
+    <!-- 모바일 터치 제스처용 오버레이 -->
+    <div id="gestureOverlay" class="gesture-overlay hidden"></div>
+
+    <!-- 알림 토스트 -->
+    <div id="notificationToast" class="notification-toast hidden">
+        <div class="toast-content">
+            <span class="toast-icon">🔔</span>
+            <span class="toast-message"></span>
+            <button class="toast-close">✕</button>
+        </div>
+    </div>
+
     <!-- 상태 업데이트용 라이브 영역 (접근성) -->
     <div aria-live="polite" aria-atomic="true" class="sr-only" id="statusUpdates"></div>
+
+    <!-- 로딩 스크린 -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <div class="app-logo">📋</div>
+            <h2 data-i18n="loading.app_title">할 일 관리 Pro</h2>
+            <div class="loading-spinner"></div>
+            <p data-i18n="loading.initializing">앱을 초기화하는 중...</p>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
