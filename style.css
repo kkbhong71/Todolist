@@ -640,6 +640,154 @@ body.dark-mode {
     color: #3182ce !important;
 }
 
+/* 대한민국 공휴일 스타일 */
+.calendar-date.korean-holiday, 
+.week-date.korean-holiday {
+    color: #dc2626 !important;
+    font-weight: 700 !important;
+    background: linear-gradient(135deg, rgba(220, 38, 38, 0.1) 0%, rgba(185, 28, 28, 0.1) 100%);
+    border-color: rgba(220, 38, 38, 0.3) !important;
+    position: relative;
+}
+
+.dark-mode .calendar-date.korean-holiday,
+.dark-mode .week-date.korean-holiday {
+    color: #f87171 !important;
+    background: linear-gradient(135deg, rgba(248, 113, 113, 0.15) 0%, rgba(239, 68, 68, 0.15) 100%);
+    border-color: rgba(248, 113, 113, 0.3) !important;
+}
+
+/* 공휴일 툴팁 스타일 */
+.calendar-date.korean-holiday,
+.week-date.korean-holiday,
+.year-date.korean-holiday {
+    cursor: help;
+}
+
+/* 공휴일 표시 아이콘 애니메이션 */
+.calendar-date.korean-holiday::before,
+.week-date.korean-holiday::before {
+    content: '🎌';
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    font-size: 10px;
+    opacity: 0.8;
+    animation: gentleWave 3s ease-in-out infinite;
+    z-index: 1;
+}
+
+.week-date.korean-holiday::before {
+    font-size: 12px;
+    top: 4px;
+    right: 4px;
+}
+
+/* 연간 뷰 공휴일 표시 */
+.year-date.korean-holiday::before {
+    content: '🎌';
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    font-size: 8px;
+    opacity: 0.9;
+    animation: gentleWave 3s ease-in-out infinite;
+    z-index: 1;
+}
+
+@keyframes gentleWave {
+    0%, 100% { 
+        transform: rotate(0deg) scale(1);
+        opacity: 0.8;
+    }
+    50% { 
+        transform: rotate(5deg) scale(1.1);
+        opacity: 1;
+    }
+}
+
+/* 공휴일 강조 효과 */
+.calendar-date.korean-holiday {
+    box-shadow: inset 0 0 0 1px rgba(220, 38, 38, 0.3);
+}
+
+.week-date.korean-holiday {
+    box-shadow: inset 0 0 0 2px rgba(220, 38, 38, 0.3);
+}
+
+.dark-mode .calendar-date.korean-holiday {
+    box-shadow: inset 0 0 0 1px rgba(248, 113, 113, 0.4);
+}
+
+.dark-mode .week-date.korean-holiday {
+    box-shadow: inset 0 0 0 2px rgba(248, 113, 113, 0.4);
+}
+
+/* 공휴일이면서 다른 상태일 때의 우선순위 */
+.calendar-date.korean-holiday.today,
+.week-date.korean-holiday.today {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    border-color: #667eea !important;
+}
+
+.calendar-date.korean-holiday.selected,
+.week-date.korean-holiday.selected {
+    background: linear-gradient(135deg, #ff7849 0%, #ff5722 100%) !important;
+    color: white !important;
+    border-color: #ff5722 !important;
+}
+
+/* 공휴일이면서 할 일이 있을 때 */
+.calendar-date.korean-holiday.has-todos,
+.week-date.korean-holiday.has-todos {
+    background: linear-gradient(135deg, rgba(220, 38, 38, 0.15) 0%, rgba(16, 185, 129, 0.15) 100%);
+    border-color: rgba(220, 38, 38, 0.4) !important;
+    box-shadow: 0 2px 8px rgba(220, 38, 38, 0.2), 0 2px 8px rgba(16, 185, 129, 0.2);
+}
+
+.dark-mode .calendar-date.korean-holiday.has-todos,
+.dark-mode .week-date.korean-holiday.has-todos {
+    background: linear-gradient(135deg, rgba(248, 113, 113, 0.2) 0%, rgba(16, 185, 129, 0.2) 100%);
+    border-color: rgba(248, 113, 113, 0.4) !important;
+}
+
+/* 공휴일 hover 효과 */
+.calendar-date.korean-holiday:hover,
+.week-date.korean-holiday:hover {
+    background: linear-gradient(135deg, rgba(220, 38, 38, 0.2) 0%, rgba(185, 28, 28, 0.2) 100%) !important;
+    border-color: rgba(220, 38, 38, 0.5) !important;
+    transform: scale(1.08);
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+}
+
+.dark-mode .calendar-date.korean-holiday:hover,
+.dark-mode .week-date.korean-holiday:hover {
+    background: linear-gradient(135deg, rgba(248, 113, 113, 0.25) 0%, rgba(239, 68, 68, 0.25) 100%) !important;
+    border-color: rgba(248, 113, 113, 0.5) !important;
+    box-shadow: 0 4px 12px rgba(248, 113, 113, 0.4);
+}
+
+.year-date.korean-holiday:hover {
+    background: linear-gradient(135deg, rgba(220, 38, 38, 0.25) 0%, rgba(185, 28, 28, 0.25) 100%) !important;
+    border-color: rgba(220, 38, 38, 0.6) !important;
+    transform: scale(1.15);
+    box-shadow: 0 2px 8px rgba(220, 38, 38, 0.4);
+}
+
+/* 다른 월의 공휴일 */
+.calendar-date.other-month.korean-holiday {
+    background: rgba(220, 38, 38, 0.06) !important;
+    border-color: rgba(220, 38, 38, 0.15) !important;
+    color: rgba(220, 38, 38, 0.6) !important;
+}
+
+.dark-mode .calendar-date.other-month.korean-holiday {
+    background: rgba(248, 113, 113, 0.08) !important;
+    border-color: rgba(248, 113, 113, 0.2) !important;
+    color: rgba(248, 113, 113, 0.6) !important;
+}
+
 /* 할 일이 있는 날짜 배경색 */
 .calendar-date.has-todos, .week-date.has-todos {
     background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(5, 150, 105, 0.15) 100%);
