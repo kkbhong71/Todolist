@@ -1,0 +1,1539 @@
+/* 전체 스타일 초기화 및 기본 설정 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', '맑은 고딕', 'Malgun Gothic', sans-serif;
+    background: linear-gradient(135deg, #F8F4FF 0%, #FFF0F8 50%, #F0FFFF 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #6B7280;
+    transition: all 0.3s ease;
+}
+
+body.dark-mode {
+    background: linear-gradient(135deg, #1a202c 0%, #2d3748 50%, #1a1a2e 100%);
+    color: #e2e8f0;
+}
+
+.container {
+    max-width: 650px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    animation: fadeInUp 0.6s ease;
+}
+
+.dark-mode .container {
+    background: rgba(45, 55, 72, 0.9);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 헤더 */
+.header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 30px;
+    color: white;
+    text-align: center;
+}
+
+.dark-mode .header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.header-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.dark-mode-toggle, .dashboard-toggle {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.dark-mode-toggle:hover, .dashboard-toggle:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.subtitle {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* 검색 섹션 */
+.search-section {
+    padding: 20px 30px;
+    background: rgba(102, 126, 234, 0.05);
+    border-bottom: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+.dark-mode .search-section {
+    background: rgba(0, 0, 0, 0.2);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.search-container {
+    position: relative;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 12px 40px 12px 16px;
+    border: 1px solid rgba(102, 126, 234, 0.2);
+    border-radius: 12px;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.dark-mode #searchInput {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #e2e8f0;
+}
+
+#searchInput:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.clear-search-btn {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #999;
+    cursor: pointer;
+    padding: 4px;
+    display: none;
+}
+
+/* 입력 섹션 */
+.input-section {
+    padding: 30px;
+}
+
+.input-container {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+#todoInput {
+    flex: 1;
+    padding: 16px 20px;
+    border: 1px solid rgba(102, 126, 234, 0.2);
+    border-radius: 16px;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.dark-mode #todoInput {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #e2e8f0;
+}
+
+#todoInput:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.add-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 16px;
+    width: 60px;
+    height: 60px;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dark-mode .add-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.add-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+}
+
+/* 할 일 추가 옵션 */
+.todo-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    padding: 16px;
+    background: rgba(102, 126, 234, 0.05);
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.dark-mode .todo-options {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.option-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    position: relative;
+}
+
+.option-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #667eea;
+    text-transform: uppercase;
+}
+
+.dark-mode .option-label {
+    color: #cbd5e0;
+}
+
+.category-select, .priority-select, .due-date-input {
+    padding: 8px 12px;
+    border: 1px solid rgba(102, 126, 234, 0.2);
+    border-radius: 8px;
+    font-size: 13px;
+    outline: none;
+    background: white;
+}
+
+.dark-mode .category-select, 
+.dark-mode .priority-select, 
+.dark-mode .due-date-input {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #e2e8f0;
+}
+
+/* 커스텀 날짜 디스플레이 스타일 */
+.custom-date-display {
+    color: #667eea !important;
+    font-weight: 600 !important;
+    border-color: rgba(102, 126, 234, 0.3) !important;
+}
+
+.dark-mode .custom-date-display {
+    color: #cbd5e0 !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.custom-date-display:hover {
+    background: rgba(102, 126, 234, 0.1) !important;
+    border-color: #667eea !important;
+}
+
+.dark-mode .custom-date-display:hover {
+    background: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* 마감일 요일 표시 스타일 */
+.due-date-day {
+    display: inline-block;
+    margin-left: 8px;
+    color: #667eea;
+    font-size: 12px;
+    font-weight: 600;
+    opacity: 0.9;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.dark-mode .due-date-day {
+    color: #cbd5e0;
+}
+
+/* 마감일 옵션 그룹 스타일 조정 */
+.option-group .due-date-input {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* 필터 섹션 */
+.filter-section {
+    padding: 20px 30px;
+    background: rgba(102, 126, 234, 0.03);
+    border-bottom: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+.dark-mode .filter-section {
+    background: rgba(0, 0, 0, 0.2);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.filter-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.filter-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #667eea;
+    text-transform: uppercase;
+}
+
+.dark-mode .filter-label {
+    color: #cbd5e0;
+}
+
+.filter-select {
+    padding: 8px 10px;
+    border: 1px solid rgba(102, 126, 234, 0.2);
+    border-radius: 6px;
+    font-size: 12px;
+    outline: none;
+    background: white;
+}
+
+.dark-mode .filter-select {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #e2e8f0;
+}
+
+/* 통계 섹션 */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    padding: 20px 30px;
+    background: rgba(102, 126, 234, 0.02);
+}
+
+.dark-mode .stats {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.stat-item {
+    text-align: center;
+    padding: 16px;
+    background: rgba(102, 126, 234, 0.08);
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+    border: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+.dark-mode .stat-item {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.stat-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+}
+
+.stat-number {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #667eea;
+    margin-bottom: 4px;
+}
+
+.dark-mode .stat-number {
+    color: #e2e8f0;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: #667eea;
+    font-weight: 500;
+}
+
+.dark-mode .stat-label {
+    color: #cbd5e0;
+}
+
+/* 달력 섹션 */
+.calendar-section {
+    margin: 20px 30px;
+    background: rgba(102, 126, 234, 0.05);
+    border-radius: 16px;
+    border: 1px solid rgba(102, 126, 234, 0.1);
+    padding: 20px;
+    position: relative;
+}
+
+.dark-mode .calendar-section {
+    background: rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.calendar-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.view-selector {
+    display: flex;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 12px;
+    padding: 3px;
+    gap: 2px;
+    border: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+.dark-mode .view-selector {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.view-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 10px;
+    background: transparent;
+    color: #667eea;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dark-mode .view-btn {
+    color: #cbd5e0;
+}
+
+.view-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.dark-mode .view-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.view-btn:hover:not(.active) {
+    background: rgba(102, 126, 234, 0.1);
+    color: #667eea;
+}
+
+.dark-mode .view-btn:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.1);
+    color: #e2e8f0;
+}
+
+.calendar-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.calendar-nav {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(102, 126, 234, 0.2);
+    border-radius: 8px;
+    width: 36px;
+    height: 36px;
+    color: #667eea;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dark-mode .calendar-nav {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #e2e8f0;
+}
+
+.calendar-nav:hover {
+    background: rgba(102, 126, 234, 0.15);
+    transform: scale(1.1);
+    border-color: #667eea;
+}
+
+.calendar-title {
+    color: #667eea;
+    font-size: 1.1rem;
+    font-weight: 700;
+    min-width: 150px;
+    text-align: center;
+}
+
+.dark-mode .calendar-title {
+    color: #e2e8f0;
+}
+
+/* 달력 그리드 */
+.calendar-container {
+    margin-bottom: 16px;
+}
+
+.calendar-container.hidden {
+    display: none;
+}
+
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    margin-bottom: 8px;
+}
+
+.weekday {
+    text-align: center;
+    padding: 8px 4px;
+    color: #667eea;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.dark-mode .weekday {
+    color: #cbd5e0;
+}
+
+.weekday:first-child {
+    color: #e53e3e !important;
+}
+
+.weekday:last-child {
+    color: #3182ce !important;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+}
+
+.week-grid {
+    gap: 6px;
+}
+
+.month-grid {
+    gap: 3px;
+}
+
+/* 날짜 요소 */
+.calendar-date, .week-date {
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(102, 126, 234, 0.1);
+    color: #6B7280;
+    font-weight: 500;
+    position: relative;
+}
+
+.dark-mode .calendar-date,
+.dark-mode .week-date {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #e2e8f0;
+}
+
+.week-date {
+    aspect-ratio: 1;
+    min-height: 70px;
+    padding: 6px;
+    border-radius: 12px;
+    flex-direction: column;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(102, 126, 234, 0.15);
+}
+
+.dark-mode .week-date {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.calendar-date {
+    aspect-ratio: 1;
+    min-height: 40px;
+    border-radius: 8px;
+}
+
+.calendar-date:hover, .week-date:hover {
+    background: rgba(102, 126, 234, 0.15);
+    transform: scale(1.05);
+    color: #667eea;
+    border-color: #667eea;
+}
+
+.dark-mode .calendar-date:hover,
+.dark-mode .week-date:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #e2e8f0;
+}
+
+.calendar-date.sunday, .week-date.sunday {
+    color: #e53e3e !important;
+}
+
+.calendar-date.saturday, .week-date.saturday {
+    color: #3182ce !important;
+}
+
+/* 할 일이 있는 날짜 배경색 */
+.calendar-date.has-todos, .week-date.has-todos {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(5, 150, 105, 0.15) 100%);
+    border-color: rgba(16, 185, 129, 0.3);
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
+}
+
+.dark-mode .calendar-date.has-todos,
+.dark-mode .week-date.has-todos {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(5, 150, 105, 0.2) 100%);
+    border-color: rgba(16, 185, 129, 0.4);
+}
+
+/* 선택된 날짜 배경색 (할 일이 있는 날짜보다 우선) - 오렌지/코랄 색상으로 변경 */
+.calendar-date.selected, .week-date.selected {
+    background: linear-gradient(135deg, #ff7849 0%, #ff5722 100%) !important;
+    color: white !important;
+    font-weight: 700;
+    transform: scale(1.1);
+    border-color: #ff5722 !important;
+    box-shadow: 0 4px 16px rgba(255, 87, 34, 0.4) !important;
+}
+
+.dark-mode .calendar-date.selected,
+.dark-mode .week-date.selected {
+    background: linear-gradient(135deg, #f97316 0%, #ea580c 100%) !important;
+    box-shadow: 0 4px 16px rgba(249, 115, 22, 0.4) !important;
+    border-color: #f97316 !important;
+}
+
+/* 오늘 날짜 배경색 (최우선 순위) - 보라색으로 고정 */
+.calendar-date.today, .week-date.today {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4) !important;
+    border-color: #667eea !important;
+}
+
+.dark-mode .calendar-date.today,
+.dark-mode .week-date.today {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+
+/* 오늘이면서 선택된 날짜일 때는 오늘 색상 우선 */
+.calendar-date.today.selected,
+.week-date.today.selected {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    border-color: #667eea !important;
+    box-shadow: 0 4px 16px rgba(102, 126, 234, 0.5) !important;
+}
+
+/* 오늘이면서 선택된 날짜일 때 점 색상 - 오늘 색상 우선 */
+.calendar-date.today.selected.has-todos::after,
+.week-date.today.selected.has-todos::after {
+    background: #06d6a0 !important;
+    border-color: white !important;
+    box-shadow: 0 0 10px rgba(6, 214, 160, 0.9) !important;
+}
+
+.calendar-date.today.selected.has-todos-many::after,
+.week-date.today.selected.has-todos-many::after {
+    box-shadow: 0 0 18px rgba(6, 214, 160, 1) !important;
+}
+
+/* 연간 뷰 - 오늘이면서 선택된 날짜일 때는 오늘 색상 우선 */
+.year-date.today.selected {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    border-color: #667eea !important;
+    box-shadow: 0 2px 10px rgba(102, 126, 234, 0.5) !important;
+}
+
+/* 할 일 표시 점 (has-todos 배경색과 함께 표시) */
+.calendar-date.has-todos::after, 
+.week-date.has-todos::after {
+    content: '';
+    position: absolute;
+    bottom: 3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    background: #10b981;
+    border: 1px solid white;
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+}
+
+/* 선택된 날짜나 오늘 날짜일 때 점 색상 조정 */
+.calendar-date.selected.has-todos::after,
+.week-date.selected.has-todos::after,
+.calendar-date.today.has-todos::after,
+.week-date.today.has-todos::after {
+    background: #fbbf24;
+    border-color: white;
+    box-shadow: 0 0 8px rgba(251, 191, 36, 0.8);
+}
+
+.week-date-number {
+    font-size: 1.1rem;
+    line-height: 1;
+}
+
+.calendar-date.other-month {
+    color: rgba(102, 126, 234, 0.3);
+    background: transparent;
+    border-color: transparent;
+}
+
+.dark-mode .calendar-date.other-month {
+    color: rgba(203, 213, 224, 0.3);
+}
+
+/* 다른 월의 날짜에 할 일이 있을 때 */
+.calendar-date.other-month.has-todos {
+    background: rgba(16, 185, 129, 0.08) !important;
+    border-color: rgba(16, 185, 129, 0.15) !important;
+}
+
+.dark-mode .calendar-date.other-month.has-todos {
+    background: rgba(16, 185, 129, 0.1) !important;
+    border-color: rgba(16, 185, 129, 0.2) !important;
+}
+
+/* 다른 월의 날짜가 선택되었을 때 - 오렌지 색상 */
+.calendar-date.other-month.selected {
+    background: linear-gradient(135deg, rgba(255, 120, 73, 0.8) 0%, rgba(255, 87, 34, 0.8) 100%) !important;
+    color: white !important;
+    border-color: rgba(255, 87, 34, 0.8) !important;
+    box-shadow: 0 2px 8px rgba(255, 87, 34, 0.3) !important;
+}
+
+.dark-mode .calendar-date.other-month.selected {
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.8) 0%, rgba(234, 88, 12, 0.8) 100%) !important;
+    border-color: rgba(249, 115, 22, 0.8) !important;
+    box-shadow: 0 2px 8px rgba(249, 115, 22, 0.3) !important;
+}
+
+/* 연간 뷰 */
+.year-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+}
+
+.year-month {
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 12px;
+    padding: 12px;
+    border: 1px solid rgba(102, 126, 234, 0.1);
+    transition: all 0.3s ease;
+}
+
+.dark-mode .year-month {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.year-month:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(102, 126, 234, 0.15);
+    border-color: #667eea;
+}
+
+.year-month-title {
+    text-align: center;
+    font-weight: 700;
+    color: #667eea;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+.dark-mode .year-month-title {
+    color: #e2e8f0;
+}
+
+.year-month-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+}
+
+/* 연간 뷰 날짜들 */
+.year-date {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: #667eea;
+    position: relative;
+}
+
+.dark-mode .year-date {
+    color: #cbd5e0;
+}
+
+.year-date:hover {
+    background: rgba(102, 126, 234, 0.15);
+    color: #667eea;
+    transform: scale(1.1);
+}
+
+/* 연간 뷰 - 할 일이 있는 날짜 */
+.year-date.has-todos {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(5, 150, 105, 0.2) 100%);
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.dark-mode .year-date.has-todos {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.25) 0%, rgba(5, 150, 105, 0.25) 100%);
+    border-color: rgba(16, 185, 129, 0.5);
+}
+
+/* 연간 뷰 - 선택된 날짜 - 오렌지/코랄 색상 */
+.year-date.selected {
+    background: linear-gradient(135deg, #ff7849 0%, #ff5722 100%) !important;
+    color: white !important;
+    font-weight: 700;
+    border: 1px solid #ff5722 !important;
+    transform: scale(1.15);
+    box-shadow: 0 2px 8px rgba(255, 87, 34, 0.4);
+}
+
+.dark-mode .year-date.selected {
+    background: linear-gradient(135deg, #f97316 0%, #ea580c 100%) !important;
+    border-color: #f97316 !important;
+    box-shadow: 0 2px 8px rgba(249, 115, 22, 0.4);
+}
+
+/* 연간 뷰 - 오늘 날짜 - 보라색으로 고정 */
+.year-date.today {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    font-weight: 700;
+    border: 1px solid #667eea !important;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4) !important;
+}
+
+.dark-mode .year-date.today {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+
+/* 연간 뷰 - 오늘이면서 선택된 날짜일 때는 오늘 색상 우선 */
+.year-date.today.selected {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    border-color: #667eea !important;
+    box-shadow: 0 2px 10px rgba(102, 126, 234, 0.5) !important;
+}
+
+/* 연간 뷰 - 할 일 표시 점 */
+.year-date.has-todos::after {
+    content: '';
+    position: absolute;
+    bottom: 1px;
+    right: 1px;
+    width: 4px;
+    height: 4px;
+    background: #10b981;
+    border: 1px solid white;
+    border-radius: 50%;
+    box-shadow: 0 0 4px rgba(16, 185, 129, 0.6);
+}
+
+/* 연간 뷰 - 선택된 날짜나 오늘일 때 점 색상 */
+.year-date.selected.has-todos::after,
+.year-date.today.has-todos::after {
+    background: #fbbf24;
+    border-color: white;
+    box-shadow: 0 0 4px rgba(251, 191, 36, 0.8);
+}
+
+.date-selector {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 12px;
+    margin-top: 12px;
+    border: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+.dark-mode .date-selector {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.today-btn {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.9) 0%, rgba(5, 150, 105, 0.9) 100%);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 12px;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.today-btn:hover {
+    transform: translateY(-1px) scale(1.05);
+    box-shadow: 0 6px 12px rgba(16, 185, 129, 0.3);
+}
+
+.selected-date {
+    color: #667eea;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.dark-mode .selected-date {
+    color: #e2e8f0;
+}
+
+/* 할 일 섹션 */
+.todo-section {
+    padding: 30px;
+    min-height: 200px;
+}
+
+.drag-guide {
+    text-align: center;
+    padding: 12px 20px;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    border: 2px dashed rgba(102, 126, 234, 0.3);
+    border-radius: 12px;
+    color: #667eea;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.drag-guide.hidden {
+    display: none;
+}
+
+.todo-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.todo-item {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 16px 20px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: all 0.5s ease;
+    border: 1px solid rgba(102, 126, 234, 0.1);
+    animation: slideIn 0.5s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.dark-mode .todo-item {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.todo-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.15);
+    border-color: #667eea;
+}
+
+.todo-item.completed {
+    opacity: 0.6;
+    background: rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.2);
+}
+
+.todo-item.completed .todo-text {
+    text-decoration: line-through;
+    color: #10b981;
+}
+
+.todo-item.priority-3 {
+    border-left: 4px solid #ef4444;
+}
+
+.todo-item.priority-2 {
+    border-left: 4px solid #f59e0b;
+}
+
+.todo-item.priority-1 {
+    border-left: 4px solid #10b981;
+}
+
+.todo-item.overdue {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.3);
+}
+
+.todo-item.due-today {
+    background: rgba(245, 158, 11, 0.1);
+    border-color: rgba(245, 158, 11, 0.3);
+}
+
+.todo-item[draggable="true"] {
+    cursor: move;
+}
+
+.todo-item.dragging {
+    opacity: 0.5;
+    transform: rotate(5deg) scale(1.05);
+    z-index: 1000;
+}
+
+.drag-handle {
+    display: none;
+    color: #A0AEC0;
+    font-size: 14px;
+    cursor: grab;
+    padding: 4px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.todo-item[draggable="true"] .drag-handle {
+    display: block;
+}
+
+.drag-handle:hover {
+    color: #667eea;
+    background: rgba(102, 126, 234, 0.1);
+}
+
+.drag-handle:active {
+    cursor: grabbing;
+}
+
+.todo-checkbox {
+    width: 24px;
+    height: 24px;
+    border: 2px solid #d1d5db;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    background: white;
+}
+
+.dark-mode .todo-checkbox {
+    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.todo-checkbox:hover {
+    border-color: #667eea;
+    transform: scale(1.1);
+}
+
+.todo-checkbox.checked {
+    background: #10b981;
+    border-color: #10b981;
+    color: white;
+}
+
+.todo-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.todo-main {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.todo-priority, .todo-category {
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+.todo-text {
+    font-size: 15px;
+    color: #2d3748;
+    font-weight: 500;
+    line-height: 1.4;
+    flex: 1;
+}
+
+.dark-mode .todo-text {
+    color: #e2e8f0;
+}
+
+.todo-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+}
+
+.todo-date, .due-date {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.today-date {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    box-shadow: 0 2px 4px rgba(16, 185, 129, 0.3);
+}
+
+.tomorrow-date {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 2px 4px rgba(102, 126, 234, 0.3);
+}
+
+.yesterday-date {
+    background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+    color: white;
+    box-shadow: 0 2px 4px rgba(107, 114, 128, 0.3);
+}
+
+.future-date {
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+    color: white;
+    box-shadow: 0 2px 4px rgba(139, 92, 246, 0.3);
+}
+
+.past-date {
+    background: linear-gradient(135deg, #94a3b8 0%, #64748b 100%);
+    color: white;
+    box-shadow: 0 2px 4px rgba(148, 163, 184, 0.3);
+}
+
+.other-date {
+    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+    color: #64748b;
+    border: 1px solid rgba(100, 116, 139, 0.2);
+}
+
+.dark-mode .other-date {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    color: #cbd5e0;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.due-today {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    color: white;
+    animation: blink 2s infinite;
+    box-shadow: 0 2px 4px rgba(245, 158, 11, 0.4);
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+.overdue-date {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: white;
+    box-shadow: 0 2px 4px rgba(239, 68, 68, 0.4);
+}
+
+.due-tomorrow {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 2px 4px rgba(102, 126, 234, 0.3);
+}
+
+.todo-actions {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.edit-btn, .delete-btn {
+    background: rgba(102, 126, 234, 0.1);
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    border: 1px solid transparent;
+}
+
+.edit-btn {
+    color: #667eea;
+}
+
+.edit-btn:hover {
+    background: #667eea;
+    color: white;
+    border-color: #667eea;
+    transform: scale(1.1);
+}
+
+.delete-btn {
+    color: #ef4444;
+}
+
+.delete-btn:hover {
+    background: #ef4444;
+    color: white;
+    border-color: #ef4444;
+    transform: scale(1.1);
+}
+
+/* 빈 상태 */
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: #667eea;
+}
+
+.dark-mode .empty-state {
+    color: #cbd5e0;
+}
+
+.empty-state.hidden {
+    display: none;
+}
+
+.empty-icon {
+    font-size: 3rem;
+    margin-bottom: 16px;
+}
+
+.empty-state p {
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* 대시보드 */
+.dashboard {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.dashboard.hidden {
+    display: none;
+}
+
+.dashboard-content {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    max-width: 600px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    border: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+.dark-mode .dashboard-content {
+    background: #2d3748;
+    color: #e2e8f0;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.dashboard-header h3 {
+    color: #667eea;
+    font-size: 1.3rem;
+    margin: 0;
+}
+
+.dark-mode .dashboard-header h3 {
+    color: #e2e8f0;
+}
+
+.close-btn {
+    background: #ef4444;
+    border: none;
+    border-radius: 8px;
+    width: 32px;
+    height: 32px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+    transform: scale(1.1);
+    background: #dc2626;
+}
+
+/* 푸터 */
+.footer {
+    text-align: center;
+    padding: 24px 30px;
+    background: rgba(102, 126, 234, 0.03);
+    color: #667eea;
+    border-top: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+.dark-mode .footer {
+    background: rgba(0, 0, 0, 0.2);
+    color: #cbd5e0;
+    border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+.footer-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.footer-btn {
+    background: rgba(102, 126, 234, 0.1);
+    border: 1px solid rgba(102, 126, 234, 0.2);
+    padding: 6px 12px;
+    border-radius: 8px;
+    color: #667eea;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dark-mode .footer-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #cbd5e0;
+}
+
+.footer-btn:hover {
+    background: rgba(102, 126, 234, 0.2);
+    border-color: #667eea;
+    transform: translateY(-1px);
+}
+
+/* 유틸리티 */
+.hidden {
+    display: none !important;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    .container {
+        border-radius: 16px;
+    }
+    
+    .title {
+        font-size: 1.7rem;
+    }
+    
+    .header {
+        padding: 20px;
+    }
+    
+    .input-section, .todo-section, .search-section, .filter-section {
+        padding: 20px;
+    }
+    
+    .calendar-section {
+        margin: 0 20px;
+        padding: 16px;
+    }
+    
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 20px;
+    }
+    
+    .todo-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .filter-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .input-container {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .add-btn {
+        width: 100%;
+        height: 48px;
+    }
+    
+    .calendar-controls {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .view-selector {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .week-date {
+        min-height: 60px;
+    }
+    
+    .year-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .todo-item {
+        padding: 12px 16px;
+        gap: 12px;
+    }
+    
+    .todo-actions {
+        flex-direction: column;
+        gap: 4px;
+    }
+    
+    .calendar-controls {
+        gap: 8px;
+    }
+    
+    .view-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+    
+    .week-date {
+        min-height: 50px;
+    }
+    
+    .year-grid {
+        grid-template-columns: 1fr;
+    }
+}

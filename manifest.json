@@ -1,0 +1,140 @@
+{
+  "name": "할 일 관리 Pro - 스마트 TODO 앱",
+  "short_name": "할 일 관리 Pro",
+  "description": "안정적이고 고급 기능을 포함한 직관적인 할 일 관리 앱. 다크모드, 통계, 필터링 지원",
+  "version": "2.0.1",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#F8F4FF",
+  "theme_color": "#667eea",
+  "scope": "./",
+  "lang": "ko-KR",
+  "dir": "ltr",
+  "categories": [
+    "productivity", 
+    "utilities", 
+    "lifestyle",
+    "business",
+    "education"
+  ],
+  "screenshots": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 390 844'%3E%3Crect width='390' height='844' fill='%23F8F4FF'/%3E%3Ctext x='195' y='422' text-anchor='middle' font-size='24' fill='%23667eea'%3E할 일 관리 Pro%3C/text%3E%3C/svg%3E",
+      "sizes": "390x844",
+      "type": "image/svg+xml",
+      "form_factor": "narrow",
+      "label": "모바일 메인 화면"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1024 768'%3E%3Crect width='1024' height='768' fill='%23F8F4FF'/%3E%3Ctext x='512' y='384' text-anchor='middle' font-size='32' fill='%23667eea'%3E할 일 관리 Pro - 데스크톱%3C/text%3E%3C/svg%3E",
+      "sizes": "1024x768",
+      "type": "image/svg+xml",
+      "form_factor": "wide",
+      "label": "데스크톱 메인 화면"
+    }
+  ],
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 72 72'%3E%3Crect width='72' height='72' rx='12' fill='%23667eea'/%3E%3Cpath d='M18 30h36v3H18zm0 9h27v3H18zm0 9h33v3H18z' fill='%23fff'/%3E%3Ccircle cx='54' cy='54' r='9' fill='%23FFB6C1'/%3E%3Cpath d='M48 54h12m-6-6v12' stroke='%23fff' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E",
+      "sizes": "72x72",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' rx='16' fill='%23667eea'/%3E%3Cpath d='M24 40h48v4H24zm0 12h36v4H24zm0 12h44v4H24z' fill='%23fff'/%3E%3Ccircle cx='72' cy='72' r='12' fill='%23FFB6C1'/%3E%3Cpath d='M64 72h16m-8-8v16' stroke='%23fff' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E",
+      "sizes": "96x96",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 144 144'%3E%3Crect width='144' height='144' rx='24' fill='%23667eea'/%3E%3Cpath d='M36 60h72v6H36zm0 18h54v6H36zm0 18h66v6H36z' fill='%23fff'/%3E%3Ccircle cx='108' cy='108' r='18' fill='%23FFB6C1'/%3E%3Cpath d='M96 108h24m-12-12v24' stroke='%23fff' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E",
+      "sizes": "144x144",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='32' fill='%23667eea'/%3E%3Cpath d='M48 80h96v8H48zm0 24h72v8H48zm0 24h88v8H48z' fill='%23fff'/%3E%3Ccircle cx='144' cy='144' r='24' fill='%23FFB6C1'/%3E%3Cpath d='M128 144h32m-16-16v32' stroke='%23fff' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='84' fill='%23667eea'/%3E%3Cpath d='M128 213h256v21H128zm0 64h192v21H128zm0 64h235v21H128z' fill='%23fff'/%3E%3Ccircle cx='384' cy='384' r='64' fill='%23FFB6C1'/%3E%3Cpath d='M336 384h96m-48-48v96' stroke='%23fff' stroke-width='10' stroke-linecap='round'/%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='32' fill='%23667eea'/%3E%3Cpath d='M48 80h96v8H48zm0 24h72v8H48zm0 24h88v8H48z' fill='%23fff'/%3E%3Ccircle cx='144' cy='144' r='24' fill='%23FFB6C1'/%3E%3Cpath d='M128 144h32m-16-16v32' stroke='%23fff' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "새 할 일 추가",
+      "short_name": "새 할 일",
+      "description": "빠르게 새로운 할 일을 추가합니다",
+      "url": "./index.html?action=add",
+      "icons": [
+        {
+          "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' rx='16' fill='%2368d391'/%3E%3Cpath d='M44 28h8v40h-8zm-16 16h40v8H28z' fill='%23fff'/%3E%3C/svg%3E",
+          "sizes": "96x96",
+          "type": "image/svg+xml"
+        }
+      ]
+    },
+    {
+      "name": "통계 보기",
+      "short_name": "통계",
+      "description": "할 일 완료 통계를 확인합니다",
+      "url": "./index.html?action=stats",
+      "icons": [
+        {
+          "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' rx='16' fill='%23f093fb'/%3E%3Cpath d='M20 70h12V50H20zm22 0h12V35H42zm22 0h12V25H64z' fill='%23fff'/%3E%3C/svg%3E",
+          "sizes": "96x96",
+          "type": "image/svg+xml"
+        }
+      ]
+    },
+    {
+      "name": "다크모드 전환",
+      "short_name": "다크모드",
+      "description": "다크모드와 라이트모드를 전환합니다",
+      "url": "./index.html?action=darkmode",
+      "icons": [
+        {
+          "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' rx='16' fill='%234a5568'/%3E%3Ccircle cx='48' cy='48' r='20' fill='%23ffd700'/%3E%3Cpath d='M48 20v8m0 40v8m28-28h-8m-40 0h-8' stroke='%23ffd700' stroke-width='3'/%3E%3C/svg%3E",
+          "sizes": "96x96",
+          "type": "image/svg+xml"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "protocol_handlers": [
+    {
+      "protocol": "web+todo",
+      "url": "./index.html?action=add&text=%s"
+    }
+  ],
+  "file_handlers": [
+    {
+      "action": "./index.html?action=import",
+      "accept": {
+        "application/json": [".json"]
+      }
+    }
+  ],
+  "launch_handler": {
+    "client_mode": "focus-existing"
+  },
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "handle_links": "preferred",
+  "capture_links": "existing-client-navigate"
+}
